@@ -1,0 +1,58 @@
+{
+  "name": "gifted-api",
+  "version": "1.0.0",
+  "description": "A simple API to track giftlists for others, and wishlists for yourself.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "nodemon",
+    "seed": "npx ts-node prisma/seed.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts",
+    "ext": "ts, js"
+  },
+  "keywords": [
+    "gift",
+    "gifts",
+    "gifting",
+    "giftlists",
+    "wishes",
+    "wishlists",
+    "events"
+  ],
+  "author": "Luke Ivie",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "express-jwt": "^6.1.0",
+    "express-jwt-authz": "^2.4.1",
+    "express-openid-connect": "^2.8.0",
+    "helmet": "^5.1.1",
+    "jwks-rsa": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/express-jwt": "^6.0.4",
+    "@types/node": "^18.7.6",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.2.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.7.4"
+  }
+}

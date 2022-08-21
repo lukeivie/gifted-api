@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  firstName String
+  lastName  String?
+
+  // giftlists Giftlist[]
+  wishlists Wishlist[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// model Giftlist {
+//   id     String  @id @default(uuid())
+//   title  String
+//   public Boolean
+
+//   author   User   @relation(fields: [authorId], references: [id])
+//   authorId String
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+model Wishlist {
+  id         String  @id @default(uuid())
+  title      String
+  isPublic   Boolean @default(true)
+  isArchived Boolean @default(false)
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Wish Wish[]
+}
+
+model Wish {
+  id         String   @id @default(uuid())
+  name       String
+  price      Decimal? @db.Decimal(8, 2)
+  brand      String?
+  url        String?
+  isPublic   Boolean  @default(true)
+  isComplete Boolean  @default(false)
+
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+  wishlistId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  images WishImages[]
+}
+
+model WishImages {
+  image   Image  @relation(fields: [imageId], references: [id])
+  imageId String
+  wish    Wish   @relation(fields: [wishId], references: [id])
+  wishId  String
+
+  isPrimary Boolean @default(false)
+
+  @@id([imageId, wishId])
+}
+
+model Image {
+  id  String  @id @default(uuid())
+  alt String?
+  url String
+
+  uploadedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  wishes WishImages[]
+}

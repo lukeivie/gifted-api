@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Wish" ALTER COLUMN "price" DROP NOT NULL;

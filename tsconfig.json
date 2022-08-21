@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es2017",
+    "baseUrl": ".",
+    "paths": {
+      "@models": ["src/models"],
+      "@models/*": ["src/models/*"],
+      "@controllers": ["src/controllers"],
+      "@controllers/*": ["src/controllers/*"],
+      "@routes": ["src/routes"],
+      "@routes/*": ["src/routes/*"],
+      "@exceptions": ["src/exceptions"],
+      "@exceptions/*": ["src/exceptions/*"],
+      "@middleware": ["src/middleware"],
+      "@middleware/*": ["src/middleware/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
