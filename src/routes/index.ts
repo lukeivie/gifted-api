@@ -2,16 +2,11 @@ import "express-async-errors";
 import { ErrorHandler } from "src/exceptions";
 import { WishlistController } from "@controllers";
 import express, { NextFunction, Request, Response } from "express";
-import { checkJwt } from "@middleware/AuthMiddleware";
-
-const app = express();
 const router = express.Router();
 
-// Wishlistt
+// wishlists
 router.get("/wishlists", WishlistController.index);
 router.get("/wishlists/:id", WishlistController.get);
-
-app.use(checkJwt);
 router.put("/wishlists/:id", WishlistController.update);
 router.post("/wishlists", WishlistController.create);
 router.delete("/wishlists/:id", WishlistController.remove);

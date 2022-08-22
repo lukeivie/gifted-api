@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { Wishlist } from "@models";
-// import { ApiError } from "@errors";
 
 async function index(req: Request, res: Response) {
+  // todo get all wishlists scoped by req.session.user.id
   const wishlists = await Wishlist.getAll();
 
   res.status(200).json(wishlists);

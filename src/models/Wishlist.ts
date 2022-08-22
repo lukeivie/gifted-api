@@ -20,11 +20,7 @@ async function update(id: string, input: Prisma.WishlistUpdateInput) {
 }
 
 async function create(input: Prisma.WishlistCreateInput) {
-  try {
-    await prisma.wishlist.create({ data: input });
-  } catch (e) {
-    throw e;
-  }
+  await prisma.wishlist.create({ data: input });
 }
 
 async function remove(id: string) {
