@@ -1,15 +1,22 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const userCreateInput: Prisma.UserCreateInput = {
-  firstName: "James",
-  lastName: "Blake",
-  email: "james.blake@example.com",
+const user1CreateInput: Prisma.UserCreateInput = {
+  externalId: "auth0|630291d99ddac50ccc98285c",
 };
 
-const wishlistCreateInput: Prisma.WishlistCreateInput = {
+const user2CreateInput: Prisma.UserCreateInput = {
+  externalId: "auth0|630331970a1cdbb3901ec008",
+};
+
+const wishlist1CreateInput: Prisma.WishlistCreateInput = {
   title: "Legos",
-  author: { create: userCreateInput },
+  user: { create: user1CreateInput },
+};
+
+const wishlist2CreateInput: Prisma.WishlistCreateInput = {
+  title: "Music Production",
+  user: { create: user2CreateInput },
 };
 
 const wishes: Prisma.WishCreateInput[] = [
@@ -18,7 +25,7 @@ const wishes: Prisma.WishCreateInput[] = [
     price: 30.25,
     brand: "Lego",
     wishlist: {
-      create: wishlistCreateInput,
+      create: wishlist1CreateInput,
     },
     images: {
       create: [
@@ -31,6 +38,14 @@ const wishes: Prisma.WishCreateInput[] = [
           },
         },
       ],
+    },
+  },
+  {
+    name: "Neumann U87i",
+    price: 3000,
+    brand: "Neumann",
+    wishlist: {
+      create: wishlist2CreateInput,
     },
   },
 ];
