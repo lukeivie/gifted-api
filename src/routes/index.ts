@@ -1,35 +1,29 @@
 import "express-async-errors";
-import { ErrorHandler } from "src/exceptions";
+import { checkJwt } from "@lib/auth";
+import { errorHandler } from "@exceptions";
 import { WishlistController } from "@controllers";
 import express, { NextFunction, Request, Response } from "express";
+
 const router = express.Router();
+const apiRouter = express.Router();
+const usersRouter = express.Router({ mergeParams: true });
+
+// main
+router.use("/api", apiRouter);
+
+// scoped by user
+apiRouter.use("/users/:userId", usersRouter);
 
 // wishlists
-router.get("/wishlists", WishlistController.index);
-router.get("/wishlists/:id", WishlistController.get);
-router.put("/wishlists/:id", WishlistController.update);
-router.post("/wishlists", WishlistController.create);
-router.delete("/wishlists/:id", WishlistController.remove);
-
-// router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-//   // 1. Log the error or send it to a 3rd party error monitoring software
-//   logger.logError(err);
-
-//   next(err);
-// });
-
-// router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-//   // 2. Send an email to yourself, or a message somewhere
-//   messenger.sendErrorMessage(err);
-
-//   next(err);
-// });
+// usersRouter.get("/", UserController.index);
+usersRouter.get("/wishlists", WishlistController.index);
+usersRouter.get("/wishlists/:wishlistId", WishlistController.get);
+usersRouter.put("/wishlists/:wishlistId", WishlistController.update);
+usersRouter.post("/wishlists", WishlistController.create);
+usersRouter.delete("/wishlists/:wishlistId", WishlistController.remove);
 
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log({ err });
-
-  // 3. Lastly, handle the error
-  ErrorHandler.handleError(err, res);
+  errorHandler.handleError(err, res);
 });
 
 export default router;

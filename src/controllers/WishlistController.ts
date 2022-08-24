@@ -1,30 +1,30 @@
-import { Request, Response } from "express";
+import { HttpCode } from "@types";
 import { Wishlist } from "@models";
+import { Request, Response } from "express";
 
 async function index(req: Request, res: Response) {
-  // todo get all wishlists scoped by req.session.user.id
-  const wishlists = await Wishlist.getAll();
+  const wishlists = await Wishlist.getAll(req.params.userId);
 
-  res.status(200).json(wishlists);
+  res.status(HttpCode.OK).json(wishlists);
 }
 
 async function create(req: Request, res: Response) {
-  const wishlist = await Wishlist.create(req.body);
+  const wishlist = await Wishlist.create({ ...req.body, user: { connect: { id: req.params.userId } } });
+  // console.log({ wishlist });
 
-  res.status(200).json({ data: wishlist });
+  res.status(HttpCode.OK).json({ data: wishlist });
 }
 
 async function update(req: Request, res: Response) {
   const wishlist = await Wishlist.update(req.params.id, req.body);
-
-  res.status(200).json({ data: wishlist });
+  res.status(HttpCode.OK).json({ data: wishlist });
 }
 
 async function get(req: Request, res: Response) {
-  const wishlist = await Wishlist.getById(req.params.id);
+  const wishlist = await Wishlist.get(req.params.id);
 
   if (wishlist) {
-    res.status(200).json({ data: wishlist });
+    res.status(HttpCode.OK).json({ data: wishlist });
   } else {
     res.status(404).json({ error: "Wishlist not found" });
   }
@@ -33,7 +33,7 @@ async function get(req: Request, res: Response) {
 async function remove(req: Request, res: Response) {
   const wishlist = await Wishlist.remove(req.params.id);
 
-  res.status(200).json({ data: wishlist });
+  res.status(HttpCode.OK).json({ data: wishlist });
 }
 
 export default { index, create, get, update, remove };

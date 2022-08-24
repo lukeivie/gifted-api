@@ -2,11 +2,11 @@ import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function getAll() {
-  return await prisma.wishlist.findMany();
+async function getAll(userId: string) {
+  return await prisma.wishlist.findMany({ where: { userId } });
 }
 
-async function getById(id: string) {
+async function get(id?: string) {
   return await prisma.wishlist.findUnique({
     where: { id },
   });
@@ -20,7 +20,7 @@ async function update(id: string, input: Prisma.WishlistUpdateInput) {
 }
 
 async function create(input: Prisma.WishlistCreateInput) {
-  await prisma.wishlist.create({ data: input });
+  return await prisma.wishlist.create({ data: input });
 }
 
 async function remove(id: string) {
@@ -29,4 +29,4 @@ async function remove(id: string) {
   });
 }
 
-export { getAll, getById, update, create, remove };
+export { getAll, get, update, create, remove };
