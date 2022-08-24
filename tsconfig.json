@@ -10,16 +10,20 @@
     "target": "es2017",
     "baseUrl": ".",
     "paths": {
-      "@models": ["src/models"],
-      "@models/*": ["src/models/*"],
       "@controllers": ["src/controllers"],
       "@controllers/*": ["src/controllers/*"],
-      "@routes": ["src/routes"],
-      "@routes/*": ["src/routes/*"],
       "@exceptions": ["src/exceptions"],
       "@exceptions/*": ["src/exceptions/*"],
+      "@lib": ["src/lib"],
+      "@lib/*": ["src/lib/*"],
       "@middleware": ["src/middleware"],
-      "@middleware/*": ["src/middleware/*"]
+      "@middleware/*": ["src/middleware/*"],
+      "@models": ["src/models"],
+      "@models/*": ["src/models/*"],
+      "@routes": ["src/routes"],
+      "@routes/*": ["src/routes/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"]
     }
   },
   "include": ["src/**/*.ts"],
