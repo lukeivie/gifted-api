@@ -1,19 +1,19 @@
-import { ApiErrorType } from "@types";
+import { ErrorType } from "@types";
 
 interface ApiErrorArgs {
-  type?: ApiErrorType;
+  type?: ErrorType;
   message: string;
   meta?: any;
 }
 
-export class ApiErrorResponse {
-  public readonly type: ApiErrorType | undefined;
+export class ErrorResponse {
+  public readonly type: ErrorType | undefined;
   public readonly message: string;
   public readonly meta: any;
 
   constructor(args: ApiErrorArgs) {
     if (args.type) {
-      this.type = args.type || ApiErrorType.DEFAULT;
+      this.type = args.type || ErrorType.DEFAULT;
     }
     this.message = args.message;
 

@@ -6,7 +6,10 @@ export enum HttpCode {
   INTERNAL_SERVER_ERROR = 500,
 }
 
-export enum ApiErrorType {
+export enum ErrorType {
   PRISMA = "PrismaError",
   DEFAULT = "ApiError",
 }
+
+export { ErrorResponse } from "./ErrorResponse";
+export { SuccessResponse } from "./SuccessResponse";

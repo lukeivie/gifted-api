@@ -23,7 +23,9 @@
       "@routes": ["src/routes"],
       "@routes/*": ["src/routes/*"],
       "@types": ["src/types"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@views": ["src/views"],
+      "@views/*": ["src/views/*"]
     }
   },
   "include": ["src/**/*.ts"],

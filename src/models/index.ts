@@ -1,3 +1,3 @@
+// export * as User from "./User";
+export * as Wish from "./Wish";
 export * as Wishlist from "./Wishlist";
-// export * as Session from "./Session";
-export * as User from "./User";

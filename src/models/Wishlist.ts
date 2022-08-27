@@ -2,8 +2,8 @@ import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function getAll(userId: string) {
-  return await prisma.wishlist.findMany({ where: { userId } });
+async function getAll(userId: string, includeWishes?: boolean) {
+  return await prisma.wishlist.findMany({ where: { userId }, include: { wishes: includeWishes ? true : false } });
 }
 
 async function get(id?: string) {
