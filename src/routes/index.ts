@@ -1,7 +1,6 @@
 import "express-async-errors";
-import { checkJwt } from "@lib/auth";
 import { errorHandler } from "@exceptions";
-import { WishlistController, WishController } from "@controllers";
+import { WishlistController, WishController, GiftlistController, RecipientController } from "@controllers";
 import express, { NextFunction, Request, Response } from "express";
 
 const router = express.Router();
@@ -23,6 +22,19 @@ usersRouter.put("/wishlists/:wishlistId", WishlistController.update);
 usersRouter.post("/wishlists", WishlistController.create);
 usersRouter.delete("/wishlists/:wishlistId", WishlistController.remove);
 usersRouter.use("/wishlists/:wishlistId", wishlistsRouter);
+
+usersRouter.get("/giftlists", GiftlistController.index);
+usersRouter.get("/giftlists/:giftlistId", GiftlistController.get);
+usersRouter.put("/giftlists/:giftlistId", GiftlistController.update);
+usersRouter.post("/giftlists", GiftlistController.create);
+usersRouter.delete("/giftlists/:giftlistId", GiftlistController.remove);
+// usersRouter.use("/giftlists/:giftlistId", giftlistsRouter);
+
+usersRouter.get("/recipients", RecipientController.index);
+usersRouter.get("/recipients/:recipientId", RecipientController.get);
+usersRouter.put("/recipients/:recipientId", RecipientController.update);
+usersRouter.post("/recipients", RecipientController.create);
+usersRouter.delete("/recipients/:recipientId", RecipientController.remove);
 
 wishlistsRouter.get("/wishes", WishController.index);
 wishlistsRouter.post("/wishes", WishController.create);
